@@ -1,1 +1,105 @@
-noch nix
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>WING-Student | Meine Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Persönliche Homepage eines WING-Studenten">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 0;
+            background: #eef3f7;
+        }
+        header {
+            background: #203864;
+            color: #fff;
+            padding: 2rem 1rem 1rem 1rem;
+            text-align: center;
+        }
+        nav {
+            background: #183054;
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #203864;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        footer {
+            background: #203864;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        img.profile {
+            max-width: 160px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 600px) {
+            main {padding: 1rem;}
+            header {padding: 1rem;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://www.svgrepo.com/show/382106/avatar-boy-student.svg" alt="Profilbild" class="profile">
+        <h1>Willkommen auf meiner Homepage!</h1>
+        <p>Ich bin Max Mustermann, WING-Student</p>
+    </header>
+    <nav>
+        <a href="#ueber-mich">Über mich</a>
+        <a href="#studium">Studium</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+    <main>
+        <section id="ueber-mich">
+            <h2>Über mich</h2>
+            <p>Hallo! Mein Name ist Max Mustermann und ich studiere Wirtschaftsingenieurwesen (WING) an der Muster-Universität. Ich interessiere mich besonders für die Schnittstelle zwischen Technik und Wirtschaft und möchte später in der Industrie arbeiten.</p>
+        </section>
+
+        <section id="studium">
+            <h2>Mein Studium</h2>
+            <ul>
+                <li><b>Studiengang:</b> Wirtschaftsingenieurwesen (WING)</li>
+                <li><b>Schwerpunkte:</b> Produktion, Digitalisierung, Management</li>
+                <li><b>Fächer:</b> Mathematik, Maschinenbau, BWL, Informatik</li>
+            </ul>
+            <p>Ich engagiere mich in studentischen Projekten und interessiere mich für Innovationen.</p>
+        </section>
+
+        <section id="kontakt">
+            <h2>Kontakt</h2>
+            <p>Du kannst mich gerne per E-Mail erreichen:</p>
+            <ul>
+                <li>E-Mail: <a href="mailto:max.mustermann@email.de">max.mustermann@email.de</a></li>
+                <li>GitHub: <a href="https://github.com/lukasalguel10" target="_blank">lukasalguel10</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        &copy; 2025 Max Mustermann | WING-Student
+    </footer>
+</body>
+</html>
