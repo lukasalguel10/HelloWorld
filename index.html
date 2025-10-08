@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lukas Algül | WING & Mechatronik</title>
-<meta name="description" content="Portfolio von Lukas Algül – WING-Student (HS Kempten), Mechatroniker (DMG MORI), Montage/Commissioning DMU 600P.">
+<meta name="description" content="Portfolio von Lukas Algül – WING-Student (HS Kempten), Mechatroniker (DMG MORI), Montage / Commissioning DMU 600P.">
 
 <style>
 :root{
@@ -33,19 +33,33 @@ a:hover{text-decoration:underline}
 /* NAV */
 .nav{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--border);
   backdrop-filter:saturate(120%) blur(8px);
-  background:color-mix(in srgb,var(--bg)70%,transparent)}
-.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-.brand{font-weight:700}
+  background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px}
+.brand{font-weight:700;white-space:nowrap}
 .links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .links a{color:var(--muted);font-weight:600}
 .links a:hover{color:var(--text)}
-.toggle,.lang-btn{
+.controls{display:flex;gap:8px;align-items:center}
+.toggle,.lang-btn,.burger{
   display:inline-flex;align-items:center;gap:6px;background:var(--panel);color:var(--muted);
-  border:1px solid var(--border);padding:6px 10px;border-radius:999px;box-shadow:var(--shadow);
+  border:1px solid var(--border);padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);
   cursor:pointer;font-size:14px;font-weight:600
 }
+.burger{display:none;padding:8px 10px}
+.burger .bar{width:18px;height:2px;background:var(--muted);position:relative}
+.burger .bar::before,.burger .bar::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--muted);transition:.25s}
+.burger .bar::before{top:-6px}.burger .bar::after{top:6px}
+.burger[aria-expanded="true"] .bar{background:transparent}
+.burger[aria-expanded="true"] .bar::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] .bar::after{transform:translateY(-6px) rotate(-45deg)}
+.drawer{display:none;position:absolute;left:0;right:0;top:100%;background:color-mix(in srgb,var(--panel)92%,transparent);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.drawer.open{display:block}
+.drawer-inner{padding:10px 20px 14px}
+.drawer-links{display:grid;gap:10px}
+.drawer-links a{color:var(--text);font-weight:600}
 
-/* GRID + ELEMENTE */
+/* GRID */
 .grid{display:grid;gap:24px}
 .hero{grid-template-columns:1.2fr .8fr;align-items:center;margin:28px 0}
 .section{grid-template-columns:1fr 1fr;margin:10px 0 24px}
@@ -55,25 +69,23 @@ h2{margin:0 0 10px}
 ul{margin:8px 0 0 18px}li{margin:4px 0}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .chip{background:var(--chip);border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:13px;font-weight:600}
+
+/* AVATAR */
 .avatar{display:grid;place-items:center}
 .avatar .img{
-  width:210px;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:2px solid var(--border);
-  background:linear-gradient(180deg,rgba(75,163,255,.15),rgba(125,211,252,.05));box-shadow:var(--shadow)}
-.avatar img{width:100%;height:100%;object-fit:cover}
+  width:260px;aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:2px solid var(--border);
+  background:linear-gradient(180deg,rgba(75,163,255,.15),rgba(125,211,252,.05));
+  box-shadow:var(--shadow)
+}
+.avatar img{width:100%;height:100%;object-fit:cover;}
 
-/* GALLERY */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow)}
-figure img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-figcaption{font-size:12px;color:var(--muted);padding:8px 10px;border-top:1px solid var(--border)}
-
+/* FOOTER & EFFECTS */
 footer{color:var(--muted);display:flex;justify-content:space-between;padding:20px 0;margin:10px 0 30px}
-@media(max-width:900px){.hero,.section{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.avatar .img{width:160px}}
-@media(max-width:520px){.gallery{grid-template-columns:1fr}}
-
-/* SCROLL FADE */
 .fade-section{opacity:0;transform:translateY(40px);transition:opacity .8s ease-out,transform .8s ease-out}
 .fade-section.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:1000px){.links{display:none}.burger{display:inline-flex}}
+@media(max-width:900px){.hero,.section{grid-template-columns:1fr}.avatar .img{width:200px}}
 </style>
 </head>
 
@@ -83,17 +95,31 @@ footer{color:var(--muted);display:flex;justify-content:space-between;padding:20p
   <div class="wrap inner">
     <div class="brand">Lukas Algül</div>
     <nav class="links">
-      <a href="#about" data-de="Über mich" data-en="About">Über mich</a>
-      <a href="#exp" data-de="Erfahrung" data-en="Experience">Erfahrung</a>
-      <a href="#edu" data-de="Ausbildung" data-en="Education">Ausbildung</a>
-      <a href="#skills" data-de="Kompetenzen" data-en="Skills">Kompetenzen</a>
-      <a href="#hobbies" data-de="Hobbys" data-en="Hobbies">Hobbys</a>
-      <a href="#gallery" data-de="DMG MORI" data-en="DMG MORI">DMG MORI</a>
-      <a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a>
+      <a href="#about">Über mich</a>
+      <a href="#exp">Erfahrung</a>
+      <a href="#edu">Ausbildung</a>
+      <a href="#skills">Kompetenzen</a>
+      <a href="#hobbies">Hobbys</a>
+      <a href="#gallery">DMG MORI</a>
+      <a href="#contact">Kontakt</a>
     </nav>
-    <div style="display:flex;gap:8px;align-items:center;">
+    <div class="controls">
       <button id="lang" class="lang-btn">🇬🇧 EN</button>
       <button id="toggle" class="toggle">🌓</button>
+      <button id="burger" class="burger" aria-expanded="false"><span class="bar"></span></button>
+    </div>
+  </div>
+  <div id="drawer" class="drawer">
+    <div class="drawer-inner">
+      <nav class="drawer-links">
+        <a href="#about">Über mich</a>
+        <a href="#exp">Erfahrung</a>
+        <a href="#edu">Ausbildung</a>
+        <a href="#skills">Kompetenzen</a>
+        <a href="#hobbies">Hobbys</a>
+        <a href="#gallery">DMG MORI</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
     </div>
   </div>
 </div>
@@ -102,21 +128,24 @@ footer{color:var(--muted);display:flex;justify-content:space-between;padding:20p
   <!-- HERO -->
   <section class="grid hero fade-section" id="about">
     <article class="card">
-      <h1 data-de="Lukas Algül" data-en="Lukas Algül">Lukas Algül</h1>
+      <h1>Lukas Algül</h1>
       <ul>
-        <li data-de="Geburtsdatum: 09.09.2001" data-en="Date of birth: 09.09.2001"></li>
-        <li data-de="Profil: WING-Student (HS Kempten) · Mechatroniker" data-en="Profile: Industrial Engineering Student (HS Kempten) · Mechatronics Technician"></li>
-        <li data-de="Fokus: Montage, Inbetriebnahme, Qualität, Auslandseinsätze" data-en="Focus: Assembly, Commissioning, Quality, International Projects"></li>
+        <li>Geburtsdatum: 09.09.2001</li>
+        <li>Profil: WING-Student (HS Kempten) · Mechatroniker</li>
+        <li>Fokus: Montage, Inbetriebnahme, Qualität, Auslandseinsätze</li>
       </ul>
       <div class="chips">
-        <span class="chip">DMU 600P</span><span class="chip">Montage</span>
-        <span class="chip">Inbetriebnahme</span><span class="chip">Qualitätsabnahme</span>
-        <span class="chip">Auslandseinsätze</span><span class="chip">WING @ HS Kempten</span>
+        <span class="chip">DMU 600P</span>
+        <span class="chip">Montage</span>
+        <span class="chip">Inbetriebnahme</span>
+        <span class="chip">Qualität</span>
+        <span class="chip">Auslandseinsätze</span>
       </div>
     </article>
     <aside class="avatar">
       <div class="img">
-        <img src="https://www.svgrepo.com/show/382106/avatar-boy-student.svg" alt="Profilbild Lukas Algül">
+        <!-- neues Profilbild -->
+        <img src="26E2634A-9937-4045-B072-A1825F381B3D.jpeg" alt="Profilbild Lukas Algül">
       </div>
     </aside>
   </section>
@@ -124,85 +153,70 @@ footer{color:var(--muted);display:flex;justify-content:space-between;padding:20p
   <!-- ERFAHRUNG + AUSBILDUNG -->
   <section class="grid section fade-section">
     <article class="card" id="exp">
-      <h2 data-de="Berufserfahrung" data-en="Experience">Berufserfahrung</h2>
+      <h2>Berufserfahrung</h2>
       <ul>
-        <li><strong data-de="Montage & Inbetriebnahme – DMG MORI" data-en="Assembly & Commissioning – DMG MORI">Montage & Inbetriebnahme – DMG MORI</strong></li>
+        <li><strong>Montage & Inbetriebnahme – DMG MORI</strong></li>
         <ul>
-          <li data-de="Aufbau der DMU 600P" data-en="Assembly of DMU 600P"></li>
-          <li data-de="Inbetriebnahme (mechanisch/elektrisch)" data-en="Commissioning (mechanical/electrical)"></li>
-          <li data-de="Endabnahme & Dokumentation" data-en="Final inspection & documentation"></li>
-          <li data-de="Zusammenarbeit mit QS & Fertigung" data-en="Collaboration with QA & manufacturing"></li>
+          <li>Aufbau der DMU 600P</li>
+          <li>Inbetriebnahme (mechanisch/elektrisch)</li>
+          <li>Endabnahme & Dokumentation</li>
+          <li>Zusammenarbeit mit QS & Fertigung</li>
         </ul>
-        <li><strong data-de="Aufbau der Montage im Ausland" data-en="International Assembly Projects">Aufbau der Montage im Ausland</strong></li>
+        <li><strong>Aufbau der Montage im Ausland</strong></li>
         <ul>
-          <li data-de="Internationale Kundeneinsätze (Montage & Commissioning vor Ort)" data-en="International on-site installations (assembly & commissioning)"></li>
-          <li data-de="Koordination mit lokalen Teams und Logistik" data-en="Coordination with local teams & logistics"></li>
-          <li data-de="Einhaltung von Normen / Sicherheitsvorgaben" data-en="Compliance with standards & safety regulations"></li>
-          <li data-de="Technische Dokumentation in Deutsch und Englisch" data-en="Technical documentation in German & English"></li>
-          <li data-de="Abnahme und Übergabe beim Kunden" data-en="Final acceptance & handover at customer site"></li>
+          <li>Internationale Kundeneinsätze (Montage & Commissioning vor Ort)</li>
+          <li>Koordination mit lokalen Teams und Logistik</li>
+          <li>Einhaltung von Normen / Sicherheitsvorgaben</li>
+          <li>Technische Dokumentation (Deutsch & Englisch)</li>
+          <li>Abnahme & Übergabe beim Kunden</li>
         </ul>
       </ul>
     </article>
 
     <article class="card" id="edu">
-      <h2 data-de="Ausbildung & Studium" data-en="Education">Ausbildung & Studium</h2>
+      <h2>Ausbildung & Studium</h2>
       <ul>
-        <li data-de="2025– Hochschule Kempten – Wirtschaftsingenieurwesen (Bachelor)" data-en="2025– University of Applied Sciences Kempten – Industrial Engineering (B.Sc.)"></li>
-        <li data-de="Ausbildung zum Mechatroniker – DMG MORI" data-en="Mechatronics Apprenticeship – DMG MORI"></li>
-        <li data-de="Abitur 2020 – Gymnasium Füssen" data-en="High School Diploma 2020 – Gymnasium Füssen"></li>
+        <li>2025 – Hochschule Kempten – Wirtschaftsingenieurwesen (Bachelor)</li>
+        <li>Ausbildung zum Mechatroniker – DMG MORI</li>
+        <li>Abitur 2020 – Gymnasium Füssen</li>
       </ul>
     </article>
   </section>
 
-  <!-- SKILLS + HOBBIES -->
+  <!-- SKILLS + HOBBYS -->
   <section class="grid section fade-section">
     <article class="card" id="skills">
-      <h2 data-de="Kompetenzen & Interessen" data-en="Skills & Interests">Kompetenzen & Interessen</h2>
+      <h2>Kompetenzen & Interessen</h2>
       <ul>
-        <li data-de="Produktions- und Montagetechnik" data-en="Production & assembly engineering"></li>
-        <li data-de="Qualitätsmanagement" data-en="Quality management"></li>
-        <li data-de="Maschinen- und Anlagenbau" data-en="Mechanical & plant engineering"></li>
-        <li data-de="Digitalisierung & Innovation" data-en="Digitalization & innovation"></li>
-        <li data-de="Wirtschaftlich-technische Schnittstellen" data-en="Techno-economic interfaces"></li>
+        <li>Produktions- & Montagetechnik</li>
+        <li>Qualitätsmanagement</li>
+        <li>Maschinen- & Anlagenbau</li>
+        <li>Digitalisierung & Innovation</li>
+        <li>Wirtschaftlich-technische Schnittstellen</li>
       </ul>
     </article>
-
     <article class="card" id="hobbies">
-      <h2 data-de="Hobbys" data-en="Hobbies">Hobbys</h2>
+      <h2>Hobbys</h2>
       <ul>
-        <li data-de="Fußball (aktiv im Verein)" data-en="Football (club level)"></li>
-        <li data-de="Fitness & Krafttraining" data-en="Fitness & strength training"></li>
-        <li data-de="Technik & Innovation" data-en="Technology & innovation"></li>
-        <li data-de="Reisen" data-en="Travel"></li>
+        <li>Fußball (aktiv im Verein)</li>
+        <li>Fitness & Krafttraining</li>
+        <li>Technik & Innovation</li>
+        <li>Reisen</li>
       </ul>
     </article>
   </section>
 
-  <!-- GALERIE -->
+  <!-- DMG MORI VIDEO -->
   <section class="grid section fade-section" id="gallery">
     <article class="card" style="grid-column:1/-1">
-      <h2>DMG MORI – Montage & Impressionen</h2>
+      <h2>DMG MORI – Montagevideo</h2>
       <div style="margin-top:20px;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:var(--shadow);">
         <iframe src="https://www.youtube.com/embed/6A8poN1wSz4?si=A2nhFL4Ax4_iobcf"
           title="DMU 600P Montage – DMG MORI" frameborder="0"
           allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share"
           allowfullscreen
-          style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;"></iframe>
-      </div>
-
-      <div class="gallery" style="margin-top:20px">
-        <figure>
-          <img src="https://share.google/images/lOS43nID97NqXXwnc" alt="DMU 600P – Kundenanlage" loading="lazy">
-          <figcaption>DMU 600P – Kundenanlage</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/dmu600p_01.jpg" alt="DMU 600P – Aufbau" loading="lazy">
-          <figcaption>Aufbau der DMU 600P</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/dmu600p_02.jpg" alt="DMU 600P – Inbetriebnahme" loading="lazy">
-          <figcaption>Inbetriebnahme</figcaption>
-        </figure>
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;">
+        </iframe>
       </div>
     </article>
   </section>
@@ -210,61 +224,26 @@ footer{color:var(--muted);display:flex;justify-content:space-between;padding:20p
   <!-- KONTAKT -->
   <section class="grid section fade-section" id="contact">
     <article class="card" style="grid-column:1/-1">
-      <h2 data-de="Kontakt" data-en="Contact">Kontakt</h2>
+      <h2>Kontakt</h2>
       <ul>
         <li><strong>E-Mail:</strong> <a href="mailto:lukas.alguel@example.com">lukas.alguel@example.com</a></li>
         <li><strong>GitHub:</strong> <a href="https://github.com/lukasalguel10" target="_blank">github.com/lukasalguel10</a></li>
-        <li><strong>LinkedIn:</strong> <a href="#" target="_blank">Profil-Link einfügen</a></li>
+        <li><strong>LinkedIn:</strong> <a href="#" target="_blank">Profil-Link</a></li>
       </ul>
     </article>
   </section>
 
   <footer>
     <span>© <span id="year"></span> Lukas Algül</span>
-    <span>Dark/Light • 🇩🇪/🇬🇧 Toggle</span>
+    <span>Dark/Light • 🇩🇪/🇬🇧 • Mobile Menu</span>
   </footer>
 </main>
 
 <script>
-// Jahr
 document.getElementById("year").textContent=new Date().getFullYear();
-// Theme Toggle
-const root=document.documentElement;
-const saved=localStorage.getItem("theme");
-if(saved){root.setAttribute("data-theme",saved);}
-else{const prefersLight=window.matchMedia("(prefers-color-scheme: light)").matches;
-  root.setAttribute("data-theme",prefersLight?"light":"dark");}
-document.getElementById("toggle").addEventListener("click",()=>{
-  const next=root.getAttribute("data-theme")==="light"?"dark":"light";
-  root.setAttribute("data-theme",next);
-  localStorage.setItem("theme",next);
-});
-// Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener("click",e=>{
-    const id=a.getAttribute("href").slice(1);
-    const el=document.getElementById(id);
-    if(el){e.preventDefault();el.scrollIntoView({behavior:"smooth",block:"start"});}
-  });
-});
-// Scroll Fade Effekt
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    entry.target.classList.toggle("visible",entry.isIntersecting);
-  });
-},{threshold:0.15});
-document.querySelectorAll(".fade-section").forEach(el=>observer.observe(el));
 
-// Language Toggle
-const langBtn=document.getElementById("lang");
-let currentLang="de";
-langBtn.addEventListener("click",()=>{
-  currentLang=currentLang==="de"?"en":"de";
-  document.querySelectorAll("[data-de]").forEach(el=>{
-    el.textContent=el.getAttribute(`data-${currentLang}`);
-  });
-  langBtn.textContent=currentLang==="de"?"🇬🇧 EN":"🇩🇪 DE";
-});
-</script>
-</body>
-</html>
+// Theme
+const root=document.documentElement;
+root.setAttribute("data-theme",localStorage.getItem("theme")|| (window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"));
+document.getElementById("toggle").addEventListener("click",()=>{
+ const next=root.getAttribute("data-theme")==="light"?"dark":"light";
